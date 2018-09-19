@@ -1,0 +1,47 @@
+<!-- 分页 -->
+					<c:forEach items="${pageBean.productList}" var="product">
+						<div class="book">
+							<div class="bookimg">
+								<img alt="" src="${product.image}">
+							</div>
+						<div class="bookIntr">
+							<span>书名：${product.name }</span><br /> <span>售价：￥${product.price}</span>
+						</div>
+					</div>
+					</c:forEach>
+					<div class="clear"></div>
+					<div id="Countpage">
+						<c:if test="${pageBean.currentPage==1}" >
+							<a href="javascript:void(0);" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</c:if>
+						<c:if test="${pageBean.currentPage!=1}">
+							<a href="${pageContext.request.contextPath}/productList?currentPage=${pageBean.currentPage-1}" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</c:if>
+						<!-- <a href="#">上一页</a> <a href="#">1</a> <a href="#">2</a> <a
+							href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a>
+						<a href="#">7</a> <a href="#">8</a> <a href="#">9</a> -->
+						<c:forEach begin="1" end="${pageBean.totalCount}" var="page">
+							<!-- 判断当前页 -->
+							<c:if test="${pageBean.currentPage==page}">
+								<a href="javascript:void(0);" class="active">${page}</a>
+							</c:if>
+							<c:if test="${pageBean.currentPage!=page}">
+								<a href="${pageContext.request.contextPath}/productList?currentPage=${page}">${page}</a>
+							</c:if>
+						</c:forEach>
+						<!-- 判断当前页是否是最后一页 -->
+						<c:if test="${pageBean.currentPage==pageBean.totalCount}">
+							<a href="javascript:void(0)" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>							
+							</a>
+						</c:if>
+						<c:if test="${pageBean.currentPage!=pageBean.totalCount}">
+							<a href="${pageContext.request.contextPath}/productList?currentPage=${pageBean.currentPage+1}" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</c:if>
+					</div>
